@@ -143,7 +143,8 @@ function checkingEnable(formId,errors)
     }
 }
 
-function formFetchValue(formId) {
+function formFetchValue(formId)
+{
     const form = document.getElementById(formId);
     const formData = {};
     
@@ -200,7 +201,6 @@ function addDegree(event)
 
     educationDegreeData.push(educationDegree);
 
-
     const tablerow = document.getElementById('qualificationsDetails');
     const row = document.createElement('tr');
     row.classList.add('degreeDataInfo');
@@ -227,6 +227,7 @@ function addDegree(event)
     marksobtained.value = '';
 
     document.querySelector('.threeQualifications').style.display='none';
+
     educationInfoData ={degree:false,university:false,totalmarks:false,marksobtained:false};
 
 
@@ -259,6 +260,27 @@ function Previous()
 function personalInfoSubmit(event)
 {  
     event.preventDefault();
+    let emptyField=checkEmptyOrNot(event.target.id);
+    console.log(emptyField);
+
+const genderRadioButtons = document.querySelectorAll('input[name="gender"]');
+let isGenderSelected = false;
+
+genderRadioButtons.forEach(radioButton => {
+    if (radioButton.checked) {
+        isGenderSelected = true;
+    }
+});
+
+if (!isGenderSelected) {
+    emptyField.push('gender');
+    
+}
+
+    if(emptyField.length!=0){
+    emptyFieldErrors(emptyField);
+      return false;
+    }
     const tempData=formFetchValue(event.target.id);
     localStorage.setItem('personalInfoData',JSON.stringify(tempData));
 
@@ -276,6 +298,11 @@ function personalInfoSubmit(event)
 function addressInfoSubmit(event)
 { 
     event.preventDefault();
+    let emptyField=checkEmptyOrNot(event.target.id);
+    if(emptyField.length!=0){
+        emptyFieldErrors(emptyField);
+          return false;
+    }
     const tempData=formFetchValue(event.target.id);
     localStorage.setItem('addressInfoData',JSON.stringify(tempData));
     document.querySelector('.loading-overlay').style.display = 'block';
@@ -321,9 +348,10 @@ function showError(msg,id,errors)
       errors[id]=true;
 }
 
-function noError(id,errors)
+function noError(id,errors=undefined)
 {
     document.querySelector('.error'+id).innerHTML='';
+    if(errors!=undefined)
     errors[id]=false;
     let temp=document.getElementById(id);
     temp.classList.remove('borderRed');
@@ -350,6 +378,7 @@ function checkField(event,id)
     {
          event.preventDefault();
     }
+    noError(event.target.id,undefined)
 }
 
 function checkLengthError(event,id, len,errors)
@@ -393,6 +422,7 @@ function checkJobProfile(event)
         event.preventDefault(); 
         return;
     }
+    noError(event.target.id);
 }   
 
 function checkError(id)
@@ -431,6 +461,35 @@ function marksCheck(errors)
         noError('marksobtained',errors);
     }
 
-
 }
 
+function checkEmptyOrNot(formId) {
+    console.log(formId);
+    const form = document.getElementById(formId);
+    const emptyField = [];
+    
+    Array.from(form.elements).forEach(input => {
+        if (input.tagName === 'SELECT') {
+            const selectedOption = input.options[input.selectedIndex];
+            if (selectedOption.value.trim() === '') 
+                emptyField.push(input.id);
+        } else if (input.tagName === 'INPUT' && (input.id=='middlename'||input.type === 'submit' || input.type === 'button')) {
+            return;
+        } else {
+            if (input.value.trim() === '')
+                emptyField.push(input.id);
+        }
+    });
+
+    return emptyField;
+}
+
+
+
+function emptyFieldErrors(errorField)
+{
+     errorField.forEach((val)=>
+    {
+        document.querySelector('.error'+val).innerHTML='* Required Field';
+    })
+}

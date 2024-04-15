@@ -92,3 +92,14 @@ body {
 {
   font-size: 18px;
 }
+
+
+.errorBox
+{
+  height: 20px;
+  margin-bottom: 10px;
+}
+p
+{
+  margin: 0 !important;
+}

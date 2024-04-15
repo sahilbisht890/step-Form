@@ -45,8 +45,13 @@
                                         </label><br>
                                         <input type="text" name="firstname" id="firstname"
                                             class="form-control ps-3 py-2 greyBorder" onkeydown="checkField(event , 'username');checkingEnable('registration-form',errorsPersonal)"
-                                            placeholder="Enter Your Full Name" required>
+                                            placeholder="Enter Your Full Name" >
                                     </div>
+                                    <div class="errorBox">
+                                        <p class="error errorfirstname text-danger"
+                                        title=""></p>
+                                    </div>
+                                   
                                 </div>
 
                                 <div class="form-group middlename">
@@ -56,6 +61,10 @@
                                             class="form-control ps-3 py-2 greyBorder"
                                             placeholder="Enter Your Middle Name">
                                     </div>
+                                    <div class="errorBox">
+                                        <p class="error errormiddlename text-danger"
+                                        title=""></p>
+                                    </div>
                                 </div>
 
                                 <div class="form-group lastname">
@@ -63,38 +72,50 @@
                                         <label for="lastname" class="fw-bold mb-2 fs-5">Last Name<span class="red-star text-danger">*</span></label><br>
                                         <input type="text" name="lastname" id="lastname" onkeydown="checkField(event , 'username');checkingEnable('registration-form',errorsPersonal)"
                                             class="form-control  ps-3 py-2 greyBorder"
-                                            placeholder="Enter Your Last Name" required>
+                                            placeholder="Enter Your Last Name" >
+                                    </div>
+                                    <div class="errorBox">
+                                        <p class="error errorlastname text-danger"title=""></p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="d-flex align-item-start justify-content-between my-2">
                                 <div class="form-group Gender ">
-                                    <label for="gender" class="fw-bold mb-4 fs-5">Gender<span class="red-star text-danger">*</span></label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="male"
-                                            value="male" required>
-                                        <label class="form-check-label fw-medium  " for="male">Male</label>
+                                    <div>
+                                        <label for="gender" class="fw-bold mb-4 fs-5">Gender<span class="red-star text-danger">*</span></label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
+                                                value="male" onchange="noError('gender')" >
+                                            <label class="form-check-label fw-medium  " for="male">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                value="female" onchange="noError('gender')">
+                                            <label class="form-check-label fw-medium " for="female">Female</label>
+                                        </div>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="female"
-                                            value="female" required>
-                                        <label class="form-check-label fw-medium " for="female">Female</label>
+                                    <div class="errorBox">
+                                        <p class="error errorgender text-danger" id="gender" title=""></p>
+
                                     </div>
                                 </div>
 
                                 <div class="form-group DateOfBirth">
                                     <label for="dob" class="fw-bold mb-2 fs-5">Date of Birth<span class="red-star text-danger">*</span></label><br>
                                     <input type="date" name="dob" id="dob" class="form-control ps-3 py-2 greyBorder" max="2004-04-01"
-                                        placeholder="Enter Your Date of Birth" required  
-                                        onkeyup="checkingEnable('registration-form',errorsPersonal)"
+                                        placeholder="Enter Your Date of Birth"  
+                                        onkeyup="checkingEnable('registration-form',errorsPersonal)" onchange="noError('dob')"
                                         >
-                                    <p class="error errordob"></p>
+                                        <div class="errorBox">
+                                            <p class="error errordob text-danger"></p>
+
+                                        </div>
                                 </div>
 
                                 <div class="form-group occupation">
                                     <label for="jobProfile" class="fw-bold mb-2 fs-5">Job Profile<span class="red-star text-danger">*</span></label><br>
-                                    <select id="jobProfile" name="jobProfile" class="form-control ps-3 py-2 greyBorder" onchange="checkingEnable('registration-form',errorsPersonal)" required>
+                                    <select id="jobProfile" name="jobProfile" class="form-control ps-3 py-2 greyBorder" onchange="checkingEnable('registration-form',errorsPersonal);noError('jobProfile')" >
                                         <option value="">Select Your Job Profile</option>
                                         <option value="Software Engineer">Software Engineer</option>
                                         <option value="Data Analyst">Data Analyst</option>
@@ -102,24 +123,34 @@
                                         <option value="Sales Representative">Sales Representative</option>
                                         <option value="Graphic Designer">Graphic Designer</option>
                                     </select>
+                                    <div class="errorBox">
+                                        <p class="error errorjobProfile text-danger"title=""></p>
+
+                                    </div>
+
                                 </div>
                                 
                             </div>
                             <div class="form-group Phone">
                                 <label for="phone" class="fw-bold mb-2 fs-5 ">Contact Number<span class="red-star text-danger">*</span></label><br>
                                 <input type="tel" name="phone" id="phone" class="form-control ps-3 py-2 greyBorder"
-                                    maxlength="10" placeholder="Enter Your Contact Number" required
+                                    maxlength="10" placeholder="Enter Your Contact Number" 
                                     onkeydown="checkLengthError(event,'phone',10,errorsPersonal);checkingEnable('registration-form',errorsPersonal)"
                                      >
-                                <p class="error errorphone text-danger"></p>
+                                     <div class="errorBox">
+                                        <p class="error errorphone text-danger"></p>
+
+                                     </div>
                             </div>
 
                             <div class="form-group Email">
                                 <label for="email" class="fw-bold mb-2 fs-5 ">Email<span class="red-star text-danger">*</span></label><br>
                                 <input type="text" name="email" id="email" class="form-control ps-3 py-2 greyBorder"
-                                    placeholder="Enter Your Email" onkeyup="checkError('email'); checkingEnable('registration-form',errorsPersonal)" required>
-                                <p class="error erroremail text-danger"></p>
-                            </div>
+                                    placeholder="Enter Your Email" onkeyup="checkError('email'); checkingEnable('registration-form',errorsPersonal)">
+                                    <div class="errorBox">
+                                        <p class="error erroremail text-danger"></p>
+                                  </div>
+                                </div>
 
                             <div class="form-group password">
                                 <label for="password" class="fw-bold mb-2 fs-5 ">Password<span class="red-star text-danger">*</span></label><br>
@@ -128,13 +159,15 @@
                                     class="d-flex align-items-center form-control p-0 justify-content-between greyBorder">
                                     <input type="password" name="password" id="password"
                                         class=" ps-3 form-control  py-2" placeholder="Enter Your Password" onkeyup="checkError('password');checkingEnable('registration-form',errorsPersonal)" 
-                                        required >
+                                        >
                                     <div class=" eyeContainer rounded text-center">
                                         <i class="bi bi-eye-slash text-dark" id="togglePassword"></i>
                                     </div>
                                 </div>
-                                <p class="error errorpassword text-danger"
-                                    title=""></p>
+                                <div class="errorBox">
+                                    <p class="error errorpassword text-danger" title=""></p>
+
+                                </div>
                             </div>
 
                             <div class="form-group text-center">
@@ -169,9 +202,13 @@
                                     <label for="streetAddress" class="fw-bold mb-2 fs-5">Street Address<span class="red-star text-danger">*</span></label><br>
                                     <textarea id="streetAddress" name="streetAddress" class="form-control  greyBorder" rows=5
                                     onkeyup="checkingEnable('addressInfo-form',errorsAddress);"
+                                    onchange="noError('streetAddress')"
                                         placeholder="Enter Your Street Address"></textarea>
                                 </div>
-                                <p class="error errorstreetAddress"></p>
+
+                                <div class="errorBox">
+                                    <p class="error errorstreetAddress text-danger" title=""></p>
+                                </div>
                             </div>
 
                             <div class="d-flex justify-content-between">
@@ -181,7 +218,9 @@
                                         placeholder="Enter Your City Name"
                                         onkeydown="checkField(event , 'jobProfile');checkJobProfile(event);checkingEnable('addressInfo-form',errorsAddress);"
                                         >
-                                    <p class="error errorcity"></p>
+                                    <div class="errorBox">
+                                        <p class="error errorcity text-danger"></p>
+                                    </div>
                                 </div>
 
                                 <div class="form-group district">
@@ -191,7 +230,10 @@
                                         placeholder="Enter Your District Name"
                                         onkeydown="checkField(event , 'jobProfile');checkJobProfile(event);checkingEnable('addressInfo-form',errorsAddress);"
                                         >
-                                    <p class="error errordistrict"></p>
+                                    <div class="errorBox">
+                                        <p class="error errordistrict text-danger"></p>
+
+                                    </div>
                                 </div>
 
                                 <div class="form-group state">
@@ -200,7 +242,9 @@
                                         placeholder="Enter Your State Name"
                                         onkeydown="checkField(event , 'jobProfile');checkJobProfile(event);checkingEnable('addressInfo-form',errorsAddress);"
                                         >
-                                    <p class="error errorstate"></p>
+                                    <div class="errorBox">
+                                        <p class="error errorstate text-danger"></p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group postalCode">
@@ -212,7 +256,9 @@
                                     maxlength="6"
 
                                     >
-                                <p class="error errorpostalCode text-danger"></p>
+                                <div class="errorBox">
+                                    <p class="error errorpostalCode text-danger"></p>
+                                </div>
                             </div>
                             <div class="form-group text-center">
                                 <input type="button" name="previous" id="previous"
