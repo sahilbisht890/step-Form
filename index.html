@@ -41,7 +41,8 @@
                             <div class="d-flex justify-content-between">
                                 <div class="form-group firstname">
                                     <div class="formGroupContainer">
-                                        <label for="firstname" class="fw-bold mb-2 fs-5">First Name</label><br>
+                                        <label for="firstname" class="fw-bold mb-2 fs-5">First Name<span class="red-star text-danger">*</span>
+                                        </label><br>
                                         <input type="text" name="firstname" id="firstname"
                                             class="form-control ps-3 py-2 greyBorder" onkeydown="checkField(event , 'username');checkingEnable('registration-form',errorsPersonal)"
                                             placeholder="Enter Your Full Name" required>
@@ -59,7 +60,7 @@
 
                                 <div class="form-group lastname">
                                     <div class="formGroupContainer">
-                                        <label for="lastname" class="fw-bold mb-2 fs-5">Last Name</label><br>
+                                        <label for="lastname" class="fw-bold mb-2 fs-5">Last Name<span class="red-star text-danger">*</span></label><br>
                                         <input type="text" name="lastname" id="lastname" onkeydown="checkField(event , 'username');checkingEnable('registration-form',errorsPersonal)"
                                             class="form-control  ps-3 py-2 greyBorder"
                                             placeholder="Enter Your Last Name" required>
@@ -69,7 +70,7 @@
 
                             <div class="d-flex align-item-start justify-content-between my-2">
                                 <div class="form-group Gender ">
-                                    <label for="gender" class="fw-bold mb-4 fs-5">Gender</label><br>
+                                    <label for="gender" class="fw-bold mb-4 fs-5">Gender<span class="red-star text-danger">*</span></label><br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="male"
                                             value="male" required>
@@ -83,7 +84,7 @@
                                 </div>
 
                                 <div class="form-group DateOfBirth">
-                                    <label for="dob" class="fw-bold mb-2 fs-5">Date of Birth</label><br>
+                                    <label for="dob" class="fw-bold mb-2 fs-5">Date of Birth<span class="red-star text-danger">*</span></label><br>
                                     <input type="date" name="dob" id="dob" class="form-control ps-3 py-2 greyBorder" max="2004-04-01"
                                         placeholder="Enter Your Date of Birth" required  
                                         onkeyup="checkingEnable('registration-form',errorsPersonal)"
@@ -92,7 +93,7 @@
                                 </div>
 
                                 <div class="form-group occupation">
-                                    <label for="jobProfile" class="fw-bold mb-2 fs-5">Job Profile</label><br>
+                                    <label for="jobProfile" class="fw-bold mb-2 fs-5">Job Profile<span class="red-star text-danger">*</span></label><br>
                                     <select id="jobProfile" name="jobProfile" class="form-control ps-3 py-2 greyBorder" onchange="checkingEnable('registration-form',errorsPersonal)" required>
                                         <option value="">Select Your Job Profile</option>
                                         <option value="Software Engineer">Software Engineer</option>
@@ -105,7 +106,7 @@
                                 
                             </div>
                             <div class="form-group Phone">
-                                <label for="phone" class="fw-bold mb-2 fs-5 ">Contact Number</label><br>
+                                <label for="phone" class="fw-bold mb-2 fs-5 ">Contact Number<span class="red-star text-danger">*</span></label><br>
                                 <input type="tel" name="phone" id="phone" class="form-control ps-3 py-2 greyBorder"
                                     maxlength="10" placeholder="Enter Your Contact Number" required
                                     onkeydown="checkLengthError(event,'phone',10,errorsPersonal);checkingEnable('registration-form',errorsPersonal)"
@@ -114,14 +115,14 @@
                             </div>
 
                             <div class="form-group Email">
-                                <label for="email" class="fw-bold mb-2 fs-5 ">Email</label><br>
+                                <label for="email" class="fw-bold mb-2 fs-5 ">Email<span class="red-star text-danger">*</span></label><br>
                                 <input type="text" name="email" id="email" class="form-control ps-3 py-2 greyBorder"
                                     placeholder="Enter Your Email" onkeyup="checkError('email'); checkingEnable('registration-form',errorsPersonal)" required>
                                 <p class="error erroremail text-danger"></p>
                             </div>
 
                             <div class="form-group password">
-                                <label for="password" class="fw-bold mb-2 fs-5 ">Password</label><br>
+                                <label for="password" class="fw-bold mb-2 fs-5 ">Password<span class="red-star text-danger">*</span></label><br>
 
                                 <div
                                     class="d-flex align-items-center form-control p-0 justify-content-between greyBorder">
@@ -165,7 +166,7 @@
 
                             <div class="form-group streetAddress">
                                 <div class="formGroupContainer">
-                                    <label for="streetAddress" class="fw-bold mb-2 fs-5">Street Address</label><br>
+                                    <label for="streetAddress" class="fw-bold mb-2 fs-5">Street Address<span class="red-star text-danger">*</span></label><br>
                                     <textarea id="streetAddress" name="streetAddress" class="form-control  greyBorder" rows=5
                                     onkeyup="checkingEnable('addressInfo-form',errorsAddress);"
                                         placeholder="Enter Your Street Address"></textarea>
@@ -175,7 +176,7 @@
 
                             <div class="d-flex justify-content-between">
                                 <div class="form-group city">
-                                    <label for="city" class="fw-bold mb-2 fs-5 ">City</label><br>
+                                    <label for="city" class="fw-bold mb-2 fs-5 ">City<span class="red-star text-danger">*</span></label><br>
                                     <input type="text" name="city" id="city" class="form-control ps-3 py-2 greyBorder"
                                         placeholder="Enter Your City Name"
                                         onkeydown="checkField(event , 'jobProfile');checkJobProfile(event);checkingEnable('addressInfo-form',errorsAddress);"
@@ -184,7 +185,7 @@
                                 </div>
 
                                 <div class="form-group district">
-                                    <label for="district" class="fw-bold mb-2 fs-5 ">District</label><br>
+                                    <label for="district" class="fw-bold mb-2 fs-5 ">District<span class="red-star text-danger">*</span></label><br>
                                     <input type="text" name="district" id="district"
                                         class="form-control ps-3 py-2 greyBorder"
                                         placeholder="Enter Your District Name"
@@ -194,7 +195,7 @@
                                 </div>
 
                                 <div class="form-group state">
-                                    <label for="state" class="fw-bold mb-2 fs-5 ">State</label><br>
+                                    <label for="state" class="fw-bold mb-2 fs-5 ">State<span class="red-star text-danger">*</span></label><br>
                                     <input type="text" name="state" id="state" class="form-control ps-3 py-2 greyBorder"
                                         placeholder="Enter Your State Name"
                                         onkeydown="checkField(event , 'jobProfile');checkJobProfile(event);checkingEnable('addressInfo-form',errorsAddress);"
@@ -203,7 +204,7 @@
                                 </div>
                             </div>
                             <div class="form-group postalCode">
-                                <label for="postalCode" class="fw-bold mb-2 fs-5 ">Postal Code</label><br>
+                                <label for="postalCode" class="fw-bold mb-2 fs-5 ">Postal Code<span class="red-star text-danger">*</span></label><br>
                                 <input type="text" name="postalCode" id="postalCode"
                                     class="form-control ps-3 py-2 greyBorder" placeholder="Enter Your Postal Code"
                                     onkeydown="checkLengthError(event,'postalCode',6,errorsAddress)"
@@ -298,7 +299,7 @@
                             </div>
 
                             <div class="form-group qualifications">
-                                <label for="qualifications" class="fw-bold fs-4 mb-4">Qualifications</label><br>
+                                <label for="qualifications" class="fw-bold fs-4 mb-4">Qualifications<span class="red-star text-danger">*</span></label><br>
                                 
                                 <div class="greyBorder p-3">
                                     <table class="qualificationsDetails w-100" id="qualificationsDetails">
