@@ -85,15 +85,12 @@ function enablefinalButton()
     nextbtn.classList.add('bg-success');
     nextbtn.classList.remove('disableButton');
     nextbtn.disabled=false;
-    document.querySelector('.lessthanthree').innerHTML=`Please Add Atleast ${3-totalAdded} Qualifications`;
-
     }
     else
     {
         nextbtn.classList.remove('bg-success');
         nextbtn.classList.add('bg-secondary');
         document.querySelector('.lessthanthree').innerHTML='';
-
     }
 
 }
@@ -120,6 +117,8 @@ function checkingEnable(formId,errors)
     }
     for(let i in errors)
     {
+        if(i=='middlename')continue;
+
         if(errors[i]||formData[i]==undefined||formData[i].length==0)
         {
            nextEnable=false;
@@ -272,6 +271,7 @@ function educationInfoSubmit(event)
     event.preventDefault();
     if(totalAdded<3)
     {
+        console.log("in");
         document.querySelector('.lessthanthree').innerHTML=`Please Add Atleast ${3-totalAdded} Qualifications`;
         return false;
     }
