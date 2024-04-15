@@ -283,8 +283,9 @@ function educationInfoSubmit(event)
     document.querySelector('.loading-overlay').style.display = 'block';
     setTimeout(() => {
         document.querySelector('.loading-overlay').style.display = 'none';
-        window.location.href='formData.html';
         curform=0;
+        window.location.href='formData.html';
+
     }, 2000);
 
 
