@@ -185,7 +185,8 @@ function addDegree(event)
     const tablerow = document.getElementById('qualificationsDetails');
     const row = document.createElement('tr');
     row.classList.add('degreeDataInfo');
-  
+    document.querySelector('.lessthanthree').innerHTML='';
+
     let text = `
         <td>${degreeData.degree}</td>
         <td>${degreeData.university}</td>
@@ -272,7 +273,7 @@ function educationInfoSubmit(event)
     if(totalAdded<3)
     {
         console.log("in");
-        document.querySelector('.lessthanthree').innerHTML=`Please Add Atleast ${3-totalAdded} Qualifications`;
+        document.querySelector('.lessthanthree').innerHTML=`Please Add Atleast 3 Qualifications`;
         return false;
     }
 
@@ -281,7 +282,9 @@ function educationInfoSubmit(event)
     localStorage.setItem('EducationInfoData',JSON.stringify(tempData));
     document.querySelector('.loading-overlay').style.display = 'block';
     setTimeout(() => {
+        document.querySelector('.loading-overlay').style.display = 'none';
         window.location.href='formData.html';
+        curform=0;
     }, 2000);
 
 
