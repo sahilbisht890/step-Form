@@ -38,6 +38,14 @@
             display: flex;
             align-items: center;
         }
+       .qualification
+        {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+    
         
     </style>
 </head>
@@ -56,9 +64,9 @@ streetAddress:'Street Address',city:'City',district:'District',state:'State',pos
 }
 let info1= JSON.parse(localStorage.getItem('personalInfoData'));
 let info2 = JSON.parse(localStorage.getItem('addressInfoData'));
-let info3 = JSON.parse(localStorage.getItem('EducationInfoData'));
+let info3 = JSON.parse( localStorage.getItem('EducationInfoData'));
 
-let info={...info1,...info2,...info3};
+let info={...info1,...info2};
 
     let temp=info['password'];    
      let star = '*';
@@ -93,6 +101,20 @@ function displayFormData(info) {
        container.appendChild(divElement);
 
     }
+    const heading=document.createElement('h3');
+    heading.innerHTML='Qualifications'
+    container.appendChild(heading);
+
+    for(let i of info3)
+    {
+        const x=document.createElement('div');
+        x.classList.add('qualification');
+        x.innerHTML=i;
+
+        container.appendChild(x);
+
+    }
+
 }
 
     </script>

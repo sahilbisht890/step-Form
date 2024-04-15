@@ -68,7 +68,10 @@ body {
 .degreeDataInfo > td
 {
   font-weight: 600;
-  padding-top: .4rem;
+  padding-top: 2rem;
+  font-size: 20px;
+  color:rgb(182 36 77);
+
 
 }
 
@@ -78,3 +81,10 @@ body {
   cursor: not-allowed !important;
   
 }
+
+.borderRed
+{
+  border: 3px solid red !important;
+
+}
+

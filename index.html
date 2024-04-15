@@ -93,17 +93,16 @@
 
                                 <div class="form-group occupation">
                                     <label for="jobProfile" class="fw-bold mb-2 fs-5">Job Profile</label><br>
-                                    <input list="jobProfiles" name="jobProfile" id="jobProfile"
-                                        class="form-control ps-3 py-2 greyBorder" placeholder="Enter Your Job Profile" required onkeydown="checkField(event,'jobProfile') ;checkJobProfile(event,'jobProfile');checkingEnable('registration-form',errorsPersonal)">
-                                    <datalist id="jobProfiles">
-                                        <option value="Software Engineer">
-                                        <option value="Data Analyst">
-                                        <option value="Marketing Manager">
-                                        <option value="Sales Representative">
-                                        <option value="Graphic Designer">
-                                    </datalist>
-
+                                    <select id="jobProfile" name="jobProfile" class="form-control ps-3 py-2 greyBorder" onchange="checkingEnable('registration-form',errorsPersonal)" required>
+                                        <option value="">Select Your Job Profile</option>
+                                        <option value="Software Engineer">Software Engineer</option>
+                                        <option value="Data Analyst">Data Analyst</option>
+                                        <option value="Marketing Manager">Marketing Manager</option>
+                                        <option value="Sales Representative">Sales Representative</option>
+                                        <option value="Graphic Designer">Graphic Designer</option>
+                                    </select>
                                 </div>
+                                
                             </div>
                             <div class="form-group Phone">
                                 <label for="phone" class="fw-bold mb-2 fs-5 ">Contact Number</label><br>
@@ -301,19 +300,20 @@
                             <div class="form-group qualifications">
                                 <label for="qualifications" class="fw-bold fs-4 mb-4">Qualifications</label><br>
                                 
-                                <div class="greyBorder">
+                                <div class="greyBorder p-3">
                                     <table class="qualificationsDetails w-100" id="qualificationsDetails">
                                       <tr>
+                                        <td class="fw-bold mb-2 fs-5 ">S.No</td>
                                         <td class="fw-bold mb-2 fs-5 ">Degree Name</td>
                                         <td class="fw-bold mb-2 fs-5 ">University Name</td>
                                         <td class="fw-bold mb-2 fs-5 ">Percentage Obtained</td>
                                       </tr>
                                     </table>
-                                    <p class="fw-medium text-secondary mt-3 threeQualifications">Add Atleast Three Qualifications</p>
+                                    <p class="fw-medium text-secondary mt-3 fw-medium threeQualifications">* Add Atleast Three Qualifications</p>
 
                                 </div>
 
-                                <p class="text-danger lessthanthree"></p>
+                                <p class="text-danger lessthanthree fw-bold mt-2 fs-5"></p>
 
                         
                             </div>

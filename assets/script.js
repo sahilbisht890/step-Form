@@ -27,7 +27,6 @@ const errorsAddress={streetAddress:false,city:false,district:false,state:false,p
 let totalAdded=0;
 let educationInfoData ={degree:false,university:false,totalmarks:false,marksobtained:false};
 
-
 function checkAddorNot()
 {
   
@@ -74,6 +73,8 @@ function checkAddorNot()
 
 }
 
+let educationDegreeData=[]
+
 
 function enablefinalButton()
 {
@@ -101,7 +102,7 @@ function checkingEnable(formId,errors)
     const nextbtn=document.getElementById('submit'+formId);
 
     let formData=formFetchValue(formId);
-    console.log(formData)
+    console.log("formData",formData)
     console.log(errorsAddress);
     let nextEnable=true;
 
@@ -111,13 +112,15 @@ function checkingEnable(formId,errors)
         {
             nextbtn.classList.add('disableButton');
             nextbtn.disabled=true;
-
-            break;
+            return ;
         }
     }
+    nextbtn.classList.remove('disableButton');
+    nextbtn.disabled=false;
     for(let i in errors)
     {
         if(i=='middlename')continue;
+        
 
         if(errors[i]||formData[i]==undefined||formData[i].length==0)
         {
@@ -132,8 +135,6 @@ function checkingEnable(formId,errors)
     nextbtn.classList.add('bg-success');
     nextbtn.classList.remove('disableButton');
     nextbtn.disabled=false;
-
-
     }
     else
     {
@@ -142,18 +143,25 @@ function checkingEnable(formId,errors)
     }
 }
 
-function formFetchValue(formId)
-{
+function formFetchValue(formId) {
     const form = document.getElementById(formId);
     const formData = {};
+    
     Array.from(form.elements).forEach(input => {
-        if (!input.value||input.name=='submit'||input.name=='previous') return;
-        formData[input.name] = input.value;
+        if (input.tagName === 'INPUT' && !input.value) return;
+        if (input.tagName === 'SELECT') {
+            const selectedOption = input.options[input.selectedIndex];
+            formData[input.name] = selectedOption.value;
+        } else if (input.tagName === 'INPUT' && (input.type === 'submit' || input.type === 'button')) {
+            return;
+        } else {
+            formData[input.name] = input.value;
+        }
     });
 
-return formData;
-
+    return formData;
 }
+
 
 function addDegree(event)
  {
@@ -170,7 +178,6 @@ function addDegree(event)
     console.log(degreeData)
     for(let x in degreeData)
     { 
-        console.log("hii ",degreeData[x]);
         y=degreeData[x];
         console.log(y);
         
@@ -182,15 +189,28 @@ function addDegree(event)
          }
 
     }
+    let percentage=((degreeData.marksObtained/degreeData.totalMarks)*100).toFixed(2);
+
+    let educationDegree = '<h3>Degree:</h3>' +
+    '<h4>' + degreeData.degree + '</h4>' + '   '+
+    '<h3>University:</h3>' +
+    '<h4>' + degreeData.university + '</h4>' +'   '+
+    '<h3>Percentage:</h3>' +
+    '<h4>' + percentage + '</h4>';
+
+    educationDegreeData.push(educationDegree);
+
+
     const tablerow = document.getElementById('qualificationsDetails');
     const row = document.createElement('tr');
     row.classList.add('degreeDataInfo');
     document.querySelector('.lessthanthree').innerHTML='';
 
     let text = `
+        <td>${totalAdded+1}</td>
         <td>${degreeData.degree}</td>
         <td>${degreeData.university}</td>
-        <td>${((degreeData.marksObtained/degreeData.totalMarks)*100).toFixed(2)}%</td>
+        <td>${percentage}%</td>
     `;
     row.innerHTML = text;
     tablerow.appendChild(row);
@@ -273,13 +293,12 @@ function educationInfoSubmit(event)
     if(totalAdded<3)
     {
         console.log("in");
-        document.querySelector('.lessthanthree').innerHTML=`Please Add Atleast 3 Qualifications`;
+        document.querySelector('.lessthanthree').innerHTML=`* Please Add Atleast 3 Qualifications`;
         return false;
     }
 
-    const tempData=formFetchValue(event.target.id);
 
-    localStorage.setItem('EducationInfoData',JSON.stringify(tempData));
+    localStorage.setItem('EducationInfoData',JSON.stringify(educationDegreeData));
     document.querySelector('.loading-overlay').style.display = 'block';
     setTimeout(() => {
         document.querySelector('.loading-overlay').style.display = 'none';
@@ -297,6 +316,8 @@ function educationInfoSubmit(event)
 function showError(msg,id,errors)
 {
       document.querySelector('.error'+id).innerHTML=msg;
+      let temp=document.getElementById(id);
+      temp.classList.add('borderRed');
       errors[id]=true;
 }
 
@@ -304,6 +325,9 @@ function noError(id,errors)
 {
     document.querySelector('.error'+id).innerHTML='';
     errors[id]=false;
+    let temp=document.getElementById(id);
+    temp.classList.remove('borderRed');
+
 
 }
 
