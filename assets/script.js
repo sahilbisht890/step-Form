@@ -343,6 +343,7 @@ function educationInfoSubmit(event)
 function showError(msg,id,errors)
 {
       document.querySelector('.error'+id).innerHTML=msg;
+      
       let temp=document.getElementById(id);
       temp.classList.add('borderRed');
       errors[id]=true;
@@ -353,6 +354,7 @@ function noError(id,errors=undefined)
     document.querySelector('.error'+id).innerHTML='';
     if(errors!=undefined)
     errors[id]=false;
+
     let temp=document.getElementById(id);
     temp.classList.remove('borderRed');
 
@@ -432,7 +434,7 @@ function checkError(id)
    let passwordRegex= /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
 
     let regexs={email:invalidEmailRegex,password:passwordRegex}
-    let msg={email:"* Invalid Email",password:"Invalid Password ,Should contains Special ,lower ,capital,digits <br>(Min Lenght should be 7)"};
+    let msg={email:"* Invalid Email",password:"Invalid Password ,Should contains Special ,lower ,capital,digits(Min Lenght should be 7)"};
     console.log(val);
     
   if ((regexs[id].test(val)&&val!='')||(id=='email')&&val.indexOf(' ')!=-1)
