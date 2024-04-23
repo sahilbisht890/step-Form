@@ -64,7 +64,7 @@ body {
   height: .4rem;
 }
 
- #registration,#addressInfo
+ #educationInfo,#addressInfo
 {
   display: none;
 }  
