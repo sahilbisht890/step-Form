@@ -107,10 +107,7 @@ let formData = {};
 function disableButtonOrNot(formId) {
     const form = document.getElementById(formId);
     const formFields = {};
-
-    // if (formId == 'registration-form')
-    //     formFields['gender'] = ''
-
+ 
     Array.from(form.elements).forEach(input => {
         if (input.tagName === 'INPUT' && input.type === 'radio') {
             if (input.checked) {
@@ -156,7 +153,8 @@ function disableButtonOrNot(formId) {
 }
 
 
-let fieldNameToValidate = {
+let fieldNameToValidate = 
+{
     'registration-form': ['password', 'email', 'phone']
     , 'addressInfo-form': ['postalCode']
 }
@@ -194,7 +192,8 @@ let totalAdded = 0;
 
 let degreeData = {};
 
-function OnchangeDegreeData() {
+function OnchangeDegreeData() 
+{
     let lengthData = 0;
     const infoDegree = ['degree', 'university', 'totalmarks', 'marksobtained'];
     infoDegree.forEach((val) => {
@@ -204,9 +203,10 @@ function OnchangeDegreeData() {
             degreeData[val] = value;
         }
     })
-
+const element=document.getElementById('addQualificationButton');
     if (lengthData == 4) {
         makeButtonActive('addQualificationButton');
+        
     }
     else {
         makeButtonDisable('addQualificationButton');
@@ -221,6 +221,7 @@ let degreeDataBase=[];
 
 function AddDegreeData() 
 {
+
     educationDegreeData=[];
      
     if (parseInt(degreeData['marksobtained']) > parseInt(degreeData['totalmarks'])) {
@@ -235,30 +236,8 @@ function AddDegreeData()
     makeButtonDisable('addQualificationButton');
 
     degreeDataBase.push([degreeData.degree,degreeData.university,degreeData.totalmarks,degreeData.marksobtained]);
-    const tablerow = document.getElementById('qualificationsDetails');
-
-     while (tablerow.rows.length > 1) {
-        tablerow.deleteRow(1);
-    }
-    degreeDataBase.forEach((val,index)=>
-    {
-        let percentage = ((val[3] / val[2]) * 100).toFixed(2);
-        const row = document.createElement('tr');
-        row.classList.add('degree'+index);
-        row.classList.add('degreeDataInfo');
-        let text = `
-        <td>${index+1}</td>
-        <td>${val[0]}</td>
-        <td>${val[1]}</td>
-        <td>${percentage}%</td>`;
-        text+=`<td><i class="fa fa-edit" id="${'edit'+index}" onclick="editDegree(event)"></i></td>`;
-    row.innerHTML = text;
-    tablerow.appendChild(row);
-
-    }
-);
-
-
+   
+    AddingDegreeDataToTable(degreeDataBase);
     totalAdded = degreeDataBase.length;
     checkTotalAdded()
     degreeData = {};
@@ -284,6 +263,59 @@ function checkTotalAdded() {
         makeButtonDisable('finalSubmit');
     }
 
+}
+
+
+function AddingDegreeDataToTable(degreeDataBase)
+{
+    const tablerow = document.getElementById('qualificationsDetails');
+
+    while (tablerow.rows.length > 1) {
+       tablerow.deleteRow(1);
+   }
+   degreeDataBase.forEach((val,index)=>
+   {
+       let percentage = ((val[3] / val[2]) * 100).toFixed(2);
+       const row = document.createElement('tr');
+       row.classList.add('degree'+index);
+       row.classList.add('degreeDataInfo');
+       let text = `
+       <td>${index+1}</td>
+       <td>${val[0]}</td>
+       <td>${val[1]}</td>
+       <td>${percentage}%</td>`;
+       text+=`<td><i class="fa fa-edit text-secondary" id="${'edit'+index}" onclick="editDegree(event)"></i>
+       <i class="fa-solid fa-delete-left fs-4 text-danger" id="${'delete'+index}" onclick="deleteDegree(event)"></i>
+       </td>`;
+   row.innerHTML = text;
+   tablerow.appendChild(row);
+
+   }
+);
+}
+
+
+function deleteDegree(event)
+{
+
+    const selectedDegree=event.target.id;
+    const index_position=selectedDegree.slice(6);
+    console.log(index_position,degreeDataBase);
+    const rowid='.degree'+index_position;
+    const table=document.getElementById('qualificationsDetails');
+    const row=document.querySelector(rowid);
+    table.removeChild(row);
+
+    degreeDataBase=degreeDataBase.filter((v,index)=>
+    {
+            if(index==index_position)return false;
+            else
+             return true;
+    }
+);
+
+AddingDegreeDataToTable(degreeDataBase);
+checkTotalAdded();
 }
 
 
@@ -341,6 +373,7 @@ function finalSubmitEducation(event) {
 
     return false;
 }
+
 
 function editDegree(event)
 {

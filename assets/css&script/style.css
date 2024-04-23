@@ -64,7 +64,7 @@ body {
   height: .4rem;
 }
 
- #educationInfo,#addressInfo
+ #registration,#addressInfo
 {
   display: none;
 }  
@@ -80,11 +80,8 @@ body {
 }
 
 .disableButton
-{
-  
+{ 
   cursor: not-allowed !important;
-  
-  
 }
 
 .borderRed
@@ -120,8 +117,8 @@ p
   right: 0;
 }
 
-.fa-edit:hover
+.fa-edit:hover,.fa-solid:hover
 {
-   color:red
+   color: red !important;
 }
  
