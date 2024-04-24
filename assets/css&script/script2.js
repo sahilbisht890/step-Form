@@ -142,33 +142,8 @@ function fetchData(formId)
 
 function disableButtonOrNot(formId) 
 {
-    const form = document.getElementById(formId);
-    const formFields = {};
- 
-    Array.from(form.elements).forEach(input => {
-        if (input.tagName === 'INPUT' && input.type === 'radio') {
-            if (input.checked) {
-                formFields[input.name] = input.value;
-            }else
-            {
-                if(input.name in formFields && formFields[input.name].length!=0)
-                {
-                    return ;
-                }
-                formFields[input.name] = '';
 
-            }
-        } else if (input.tagName === 'INPUT' && input.type === 'date') {
-            formFields[input.name] = input.value;
-        } else if (input.tagName === 'SELECT') {
-            const selectedOption = input.options[input.selectedIndex];
-            formFields[input.name] = selectedOption.value;
-        } else if (input.tagName === 'INPUT' && (input.type === 'submit' || input.type === 'button')) {
-            return;
-        } else {
-            formFields[input.name] = input.value;
-        }
-    });
+     let formFields= fetchData(formId)
 
     let passed = true;
     for (let i in formFields) {
