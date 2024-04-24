@@ -104,7 +104,44 @@ function checkValidation(value, id) {
 
 let formData = {};
 
-function disableButtonOrNot(formId) {
+
+function fetchData(formId)
+{
+    const form = document.getElementById(formId);
+    const formFields = {};
+ 
+    Array.from(form.elements).forEach(input => {
+        if (input.tagName === 'INPUT' && input.type === 'radio') {
+            if (input.checked) {
+                formFields[input.name] = input.value;
+            }else
+            {
+                if(input.name in formFields && formFields[input.name].length!=0)
+                {
+                    return ;
+                }
+                formFields[input.name] = '';
+
+            }
+        } else if (input.tagName === 'INPUT' && input.type === 'date') {
+            formFields[input.name] = input.value;
+        } else if (input.tagName === 'SELECT') {
+            const selectedOption = input.options[input.selectedIndex];
+            formFields[input.name] = selectedOption.value;
+        } else if (input.tagName === 'INPUT' && (input.type === 'submit' || input.type === 'button')) {
+            return;
+        } else {
+            formFields[input.name] = input.value;
+        }
+    });
+
+    return formFields;
+}
+
+
+
+function disableButtonOrNot(formId) 
+{
     const form = document.getElementById(formId);
     const formFields = {};
  
@@ -164,6 +201,7 @@ function onSubmitPersonal(event) {
     event.preventDefault();
     let fieldstoValidate = fieldNameToValidate[event.target.id];
     let errorPresent = false;
+    formData=fetchData(event.target.id);
     fieldstoValidate.forEach((val) => {
         if (checkValidation(formData[val], val)) {
             errorPresent = true;
